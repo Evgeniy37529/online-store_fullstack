@@ -1,0 +1,25 @@
+@import "~bootstrap/scss/bootstrap";
+
+// .f {background-color: #d8e0eae1}
+a{
+    text-decoration: none;
+    color: #5c2267;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.active {
+    background-color: rgb(85, 72, 219);
+}
+
+.navshadow {
+    box-shadow: 0px 0px 5px 2px #878484;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+.carousel-inner img {
+    height: 100%;
+    // object-fit: contain;
+}
