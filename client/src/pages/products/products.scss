@@ -1,0 +1,22 @@
+.product {
+    &__title {
+        color: #af0e0e;
+    }
+
+    &__img {
+        height: 250px;
+        width: 100%; 
+        object-fit: contain;
+    }
+
+    &__card {
+        box-shadow: 0 0 5px 1px #40188ea1
+    }
+}
+
+.aside {
+
+    &__filter {
+        background-color: #fff;
+    }
+}

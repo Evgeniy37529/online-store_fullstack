@@ -3,41 +3,54 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Main } from '../pages/Main';
 import { AdminPanel } from '../pages/AdminPanel';
-import { Basket } from '../pages/Basket';
-import { Products } from '../pages/Products';
+import { Basket } from '../pages/basket/Basket';
+import { Products } from '../pages/products/Products';
 import { Auth } from '../pages/Auth';
+import { Device } from '../pages/Device';
+import { Order } from '../pages/order/Order';
+import { useAppSelector } from '../store/hooksStore';
+import { Routing } from '../constanst/const';
 
 export const AppRouting: React.FC = () => {
-  const isAuth = true;
+  const { MAIN, ADMIN_PANEL, BASKET, PRODUCTS, SIGNUP, SIGNIN, DEVICE, ORDER } = Routing;
+  const { isAuth } = useAppSelector((state) => state.user);
 
   const authRoutes = [
     {
-      path: 'admin',
+      path: ADMIN_PANEL,
       element: <AdminPanel />,
     },
     {
-      path: 'basket',
+      path: BASKET,
       element: <Basket />,
     },
   ];
 
   const publicRoutes = [
     {
-      path: '/',
+      path: MAIN,
       element: <Main />,
     },
     {
-      path: 'products',
+      path: PRODUCTS,
       element: <Products />,
     },
 
     {
-      path: 'signup',
+      path: SIGNUP,
       element: <Auth />,
     },
     {
-      path: 'signin',
+      path: SIGNIN,
       element: <Auth />,
+    },
+    {
+      path: DEVICE,
+      element: <Device />,
+    },
+    {
+      path: ORDER,
+      element: <Order />,
     },
   ];
   return (

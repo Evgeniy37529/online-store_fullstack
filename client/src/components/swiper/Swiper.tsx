@@ -1,13 +1,14 @@
 import Carousel from 'react-bootstrap/Carousel';
+import './swiper.scss';
 
 export const Swiper = () => {
   return (
-    <Carousel style={{ height: '300px' }}>
+    <Carousel className="carousel">
       <Carousel.Item className="d-block" style={{ height: '100%' }}>
         <img
           className="d-block w-100"
           style={{ height: '100%' }}
-          src={require('../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
+          src={require('../../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
           alt="First slide"
         />
       </Carousel.Item>
@@ -15,7 +16,7 @@ export const Swiper = () => {
         <img
           style={{ height: '100%' }}
           className="d-block w-100"
-          src={require('../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
+          src={require('../../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
           alt="Second slide"
         />
       </Carousel.Item>
@@ -23,7 +24,7 @@ export const Swiper = () => {
         <img
           style={{ height: '100%' }}
           className="d-block w-100"
-          src={require('../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
+          src={require('../../assets/img/imgonline-com-ua-Resize-JJpv4q4nEJB.jpg')}
           alt="Third slide"
         />
       </Carousel.Item>

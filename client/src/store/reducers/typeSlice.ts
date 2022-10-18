@@ -1,18 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTypes } from '../actionCreators/actionCreator';
-import { typeTypes, IState } from '../../typesApp/types';
-
-// const initialState: typeTypes = [];
+import { getTypes, postType } from '../actionCreators/actionCreator';
+import { typeTypes, IState, typeType } from '../../typesApp/types';
 
 const initialState: IState = {
   types: [],
+  selectedType: null,
 };
 
 export const typesSlice = createSlice({
   name: 'types',
   initialState,
   reducers: {
-    red: (state) => console.log(state),
+    setSelectedType: (state, action: { payload: typeType | null }) => {
+      state.selectedType = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -21,7 +22,10 @@ export const typesSlice = createSlice({
         state.types = action.payload;
       }
     );
+    builder.addCase(postType.fulfilled.type, (state: IState) => {
+      return state;
+    });
   },
 });
-
+export const { setSelectedType } = typesSlice.actions;
 export default typesSlice.reducer;

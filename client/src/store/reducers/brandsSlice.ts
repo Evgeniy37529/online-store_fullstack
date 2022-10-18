@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBrands } from '../actionCreators/actionCreator';
-import { IState, typeBrands } from '../../typesApp/brands';
+import { getBrands, postBrand } from '../actionCreators/actionCreator';
+import { IState, typeBrands, typeBrand } from '../../typesApp/brands';
 
 const initialState: IState = {
   brands: [],
   selectedBrand: null,
 };
 
-const brandSlice = createSlice({
+export const brandSlice = createSlice({
   name: 'brands',
   initialState,
   reducers: {
-    setSelectedBrand: (state, action: { type: string; payload: { id: number; name: string } }) => {
-      state.selectedBrand = action.payload.id;
+    setSelectedBrand: (state, action: { type: string; payload: typeBrand | null }) => {
+      state.selectedBrand = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -22,6 +22,9 @@ const brandSlice = createSlice({
         state.brands = action.payload;
       }
     );
+    builder.addCase(postBrand.fulfilled.type, (state: IState) => {
+      return state;
+    });
   },
 });
 export const { setSelectedBrand } = brandSlice.actions;

@@ -8,6 +8,7 @@ export type typesDevice = {
   updatedAt: string;
   typeId: number;
   brandId: number;
+  info: any;
 };
 
 export type typeFetchDevice = {
@@ -17,7 +18,8 @@ export type typeFetchDevice = {
 
 export interface IState {
   devices: typesDevice[];
-  selectedDevice: number | null;
+  selectedIdDevice: number | null;
+  loading: boolean;
 }
 
 export type typeQueryDevice = {
@@ -25,4 +27,22 @@ export type typeQueryDevice = {
   typeId?: string;
   limit?: string;
   page?: string;
-}
+};
+
+// export type postTypeDevice = {
+//   name: string;
+//   price: number;
+//   img: string;
+//   typeId: number;
+//   brandId: number;
+//   info: any;
+// };
+
+export type postTypeDevice = {
+  name: any;
+  price: any;
+  img: any;
+  typeId: any;
+  brandId: any;
+  info: any;
+};

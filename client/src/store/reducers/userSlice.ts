@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { postUser, loginUser } from '../actionCreators/actionCreator';
+import { postUser, loginUser, checkUser } from '../actionCreators/actionCreator';
 import { IState, decodeUser } from '../../typesApp/user';
 
 const initialState: IState = {
@@ -8,6 +8,7 @@ const initialState: IState = {
   email: '',
   id: null,
   error: '',
+  loading: false,
 };
 
 export const userSlice = createSlice({
@@ -23,6 +24,9 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(postUser.pending.type, (state) => {
+      state.loading = true;
+    });
     builder.addCase(
       postUser.fulfilled.type,
       (state: IState, action: { type: string; payload: decodeUser }) => {
@@ -31,6 +35,7 @@ export const userSlice = createSlice({
         state.email = action.payload.email;
         state.isAuth = true;
         state.error = '';
+        state.loading = true;
       }
     );
     builder.addCase(
@@ -40,6 +45,9 @@ export const userSlice = createSlice({
         state.isAuth = false;
       }
     );
+    builder.addCase(loginUser.pending.type, (state) => {
+      state.loading = false;
+    });
     builder.addCase(
       loginUser.rejected.type,
       (state: IState, action: { type: string; payload: string }) => {
@@ -55,6 +63,18 @@ export const userSlice = createSlice({
         state.email = action.payload.email;
         state.isAuth = true;
         state.error = '';
+        state.loading = false;
+      }
+    );
+    builder.addCase(
+      checkUser.fulfilled.type,
+      (state: IState, action: { type: string; payload: decodeUser }) => {
+        state.id = action.payload.id;
+        state.role = action.payload?.role;
+        state.email = action.payload.email;
+        state.isAuth = true;
+        state.error = '';
+        state.loading = false;
       }
     );
   },

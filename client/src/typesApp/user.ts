@@ -18,4 +18,5 @@ export interface IState {
   email: string;
   role: string;
   error: string;
+  loading: boolean;
 }

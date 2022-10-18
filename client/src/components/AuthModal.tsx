@@ -16,7 +16,6 @@ export const AuthModal: React.FC<IAuthModal> = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       onHide={() => handleClick()}
-      //onClick={handleClick}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Error registration</Modal.Title>

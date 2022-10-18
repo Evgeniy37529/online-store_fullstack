@@ -1,4 +1,14 @@
 @import "~bootstrap/scss/bootstrap";
+html {
+    height: 100%;
+}
+
+body {
+    background: rgb(89,85,153);
+    background: linear-gradient(90deg, rgba(89,85,153,0.6646008745294993) 0%, rgba(133,133,230,0.4405112386751575) 35%, rgba(133,127,166,0.630987429151348) 100%);
+    background: #eee;
+    overflow: auto;
+}
 
 // .f {background-color: #d8e0eae1}
 a{
@@ -12,9 +22,7 @@ a{
     background-color: rgb(85, 72, 219);
 }
 
-.navshadow {
-    box-shadow: 0px 0px 5px 2px #878484;
-}
+
 
 .carousel-inner {
     height: 100%;
@@ -22,4 +30,8 @@ a{
 .carousel-inner img {
     height: 100%;
     // object-fit: contain;
+}
+
+.container-t {
+   padding-top: 55px !important;
 }

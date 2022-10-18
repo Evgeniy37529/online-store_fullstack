@@ -7,18 +7,18 @@ class DeviceController {
     async create(req, res, next) {
         try {
 
-            const {name, price, typeId, brandId, info} = req.body;
+            let {name, price, typeId, brandId, info} = req.body;
             
             const {img} = req.files;
             let fileName = uuid.v4() + '.jpg';
             img.mv(path.resolve(__dirname, '..', 'static', fileName));
     
             const device = await Device.create({name, price, typeId, brandId, img: fileName});
-
+        
             if (info) {
                 info = JSON.parse(info);
                 info.forEach(i => {
-                    Device.create({
+                    DeviceInfo.create({
                         title: i.title,
                         description: i.description,
                         deviceId: device.id
@@ -35,7 +35,7 @@ class DeviceController {
 
     async getAll(req, res) {
         let {brandId, typeId, limit, page} = req.query;
-        limit = limit || 9;
+        limit = limit || 20;
         page = page || 1;
         let offset = limit * page - limit;
         let devices;

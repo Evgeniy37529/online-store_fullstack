@@ -1,0 +1,27 @@
+.header {
+    position: fixed;
+    top: 0;
+    left:0;
+    right: 0;
+    z-index: 200;
+
+    &__nav {
+        height: 75px;
+        background-color: #fff;
+    }
+}
+
+.navshadow {
+    box-shadow: 0px 0px 5px 2px #878484;
+}
+
+.basket {
+    position: relative;
+
+    &__badge {
+        position: absolute;
+        top: -4px;
+        right: -5px;
+        font-size: 10px !important;
+    }
+}

@@ -1,20 +1,25 @@
-import React from 'react';
-import { Products } from './Products';
-import { Swiper } from '../components/Swiper';
+import React, { useEffect } from 'react';
+import { Swiper } from '../components/swiper/Swiper';
 import { ProductList } from '../components/ProductList';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
+import { useBasket } from '../hooks/useBasket';
+import { useUser } from '../hooks/useUser';
 
-export const Main: React.FC = () => {
+export const Main: React.FC = React.memo(() => {
+  const { idUser } = useUser();
+  const { setBasket, writeIdBasket } = useBasket();
+
+  useEffect(() => {
+    idUser && setBasket(idUser).then(() => writeIdBasket(idUser));
+  }, []);
+  console.log(idUser);
+
   return (
-    <>
+    <Row className="container-t">
       <Swiper />
-
-      <Container fluid className="mt-0">
-        <h2 className="fs-2" style={{ color: '#af0e0e', margin: '2rem 0' }}>
-          Least Products
-        </h2>
+      <Container>
         <ProductList />
       </Container>
-    </>
+    </Row>
   );
-};
+});

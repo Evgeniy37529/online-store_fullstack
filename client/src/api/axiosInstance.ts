@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-//const axiosInstance = axios.create();
-
 const publicAxiosInstance = axios.create({
-  //baseURL: process.env.REACT_APP_API_URL,
   baseURL: 'http://localhost:5000/api',
 });
 
 const authAxiosInstance = axios.create({
-  //   baseURL: process.env.REACT_APP_API_URL,
-  baseURL: 'http://localhost:5000/api/user',
+  baseURL: 'http://localhost:5000/api/',
 });
 
 authAxiosInstance.interceptors.request.use((config) => {

@@ -1,42 +1,54 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hooksStore';
-import { getDevices } from '../store/actionCreators/actionCreator';
-import { Card, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useMemo } from 'react';
+import { Col, Row, Container } from 'react-bootstrap';
 import { typesDevice } from '../typesApp/device';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useDevices } from '../hooks/useDevices';
+import { useOneDevice } from '../hooks/useOneDevice';
+import { ProductCard } from './ProductCard';
 
-export const ProductList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { devices } = useAppSelector((status) => status.devices);
+export const ProductList: React.FC = React.memo(() => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { devices } = useDevices();
+  const { setDevice } = useOneDevice();
 
-  useEffect(() => {
-    dispatch(getDevices({}));
-  }, []);
+  const showDevice = useCallback(
+    (id: number) => {
+      setDevice(id)
+        .then(() =>
+          navigate(`/device/${id}`, { replace: true, state: { from: location.pathname } })
+        )
+        .then(() => localStorage.setItem('idDevice', `${id}`));
+    },
+    [setDevice]
+  );
 
-  useEffect(() => console.log(devices), [devices]);
+  const deviceElements = useMemo(() => {
+    return devices?.map((device: typesDevice) => {
+      return (
+        <Col key={device.id} md={6} lg={4} className="mt-3" onClick={() => showDevice(device.id)}>
+          <ProductCard key={device.id} device={device} />
+        </Col>
+      );
+    });
+  }, [devices]);
 
   return (
-    <Row>
-      {devices.map(({ id, name, price, rating, img }: typesDevice) => {
-        return (
-          <Col key={id} md={6} lg={4} className="mt-2">
-            <Link to="#">
-              <Card>
-                <Card.Img
-                  src={`http://localhost:5000/${img}`}
-                  style={{ height: '300px', width: '100%', objectFit: 'contain' }}
-                />
-                <Card.Body>
-                  <Card.Title className="d-flex justify-content-between">
-                    <span>{name}</span>
-                    <span>$ {price}</span>
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Link>
-          </Col>
-        );
-      })}
-    </Row>
+    <Container className="product__list">
+      <h2 className="fs-2 mt-3 mt-md-0 product__title">Список продуктов</h2>
+      <Row>
+        {deviceElements.length ? (
+          deviceElements
+        ) : (
+          <h2
+            className="d-flex align-items-center justify-content-center"
+            style={{ height: '50vh' }}
+          >
+            Устройства не найдены
+          </h2>
+        )}
+      </Row>
+    </Container>
   );
-};
+});
